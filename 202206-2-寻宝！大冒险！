@@ -1,0 +1,42 @@
+/*
+*/
+
+
+#include<bits/stdc++.h>
+using namespace std;
+struct tree{
+    int l;
+    int r;
+};
+int main(){
+    int n=0,l=0,s=0;
+    scanf("%d %d %d",&n,&l,&s);
+    tree t[n];
+    map<int,map<int,int>>mapp;
+    int b[s+1][s+1];
+    for(int i=0; i<n; i++){
+        scanf("%d %d",&t[i].l,&t[i].r);
+        mapp[t[i].l][t[i].r]=1;
+    }
+    for(int i=s;i>=0;i--){
+        for(int j=0;j<=s;j++){
+            scanf("%d",&b[i][j]);
+        }
+    }
+    int cnt=0;
+    for(int i=0;i<n;i++){
+        int x=t[i].l,y=t[i].r;
+        bool flag=true;
+        for(int j=0;j<=s;j++){
+            for(int k=0;k<=s;k++){
+                if(x+s>l||y+s>l||mapp[x+j][y+k]!=b[j][k]){
+                    flag=false;
+                    break;
+                }
+            }
+        }
+        if(flag) cnt++;
+    }
+    printf("%d\n",cnt);
+    return 0;
+}
